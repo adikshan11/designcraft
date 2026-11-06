@@ -544,6 +544,7 @@ mod tests {
         assert_eq!(designcraft_render::pdf_page_count(&bytes(1)), Some(2));
     }
 
+    /// A batch export puts each version's files in a folder of its own.
     #[test]
     fn files_go_into_a_folder_per_version() {
         let dir = tempfile::tempdir().unwrap();
@@ -557,6 +558,7 @@ mod tests {
         assert!(pdf.starts_with(b"%PDF-"));
     }
 
+    /// Export names drop what a file name can't hold, device names get a `_`, and repeats are made unique.
     #[test]
     fn names_are_made_safe_and_unique() {
         assert_eq!(safe_name("../a/b:c*?"), "a b c");
